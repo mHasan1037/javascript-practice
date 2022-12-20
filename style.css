@@ -1,0 +1,457 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aliceblue;
+}
+
+.container{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: white;
+    min-width: 50%;
+    height: fit-content;
+    max-width: 700px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    gap: 50px;
+}
+
+aside{
+    background-color: rgb(95, 51, 253);
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    min-width: 20%;
+}
+
+.step{
+    display: flex;
+    gap: 13px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.step-num{
+    color: white;
+    width: 25px;
+    height: 25px;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.step-num.active{
+    background-color: white;
+    color: black;
+    border-color: rgb(80, 79, 79);
+}
+
+.step-desc p{
+   color: rgb(197, 194, 194);
+   font-size: 12px;
+   margin-bottom: 2px;
+}
+
+.step-desc h5{
+    color: white;
+}
+
+main{
+    max-width: 70%;
+}
+
+.form-section{
+    width: 100%;
+    margin: 20px auto;
+    display: none;
+}
+
+.form-section.active{
+    display: block;
+}
+
+.form-section h2{
+    color:rgb(29, 28, 28);
+    font-weight: bold;
+}
+
+.form-section p{
+    color:rgb(105, 104, 104);
+}
+
+form{
+    margin: 30px 0;
+}
+
+.form-control{
+    margin: 20px 0;
+    position: relative;
+}
+
+.form-control small{
+    position: absolute;
+    right: 0;
+    top: 2px;
+    color: #e74c3c;
+    display: none;
+}
+
+.form-control.error small{
+    display: block;
+}
+
+.form-control label{
+    display: block;
+    margin-bottom: 3px;
+}
+
+.form-input{
+    padding: 10px;
+    border: 1px solid rgb(228, 227, 227);
+    border-radius: 3px;
+    width: 100%;
+}
+
+.form-control.success .form-input{
+    border-color: #2ecc71;
+}
+
+.form-control.error .form-input{
+    border-color: #e74c3c;
+}
+
+.form-input:focus{
+    outline: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.form-control .fa-solid{
+    position: absolute;
+    top: 31px;
+    right: 7px;
+    display: none;
+}
+
+.form-control.success .fa-circle-check{
+    display: block;
+    color: #2ecc71;
+}
+
+.form-control.error .fa-circle-exclamation{
+    display: block;
+    color: #e74c3c;
+}
+
+.btn-container{
+    width: 100%;
+    min-height: 30px;
+    margin-top: 40px;
+}
+
+.next-step{
+    float: right;
+    cursor: pointer;
+    border: none;
+    padding: 10px 20px;
+    background-color: rgb(32, 87, 238);
+    color: white;
+    border-radius: 5px;
+}
+
+.next-step:hover{
+    background-color: rgb(4, 69, 247); 
+}
+
+.prev-btn{
+    float: left;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    margin-top: 8px;
+    opacity: 0.7;
+}
+
+.prev-btn:hover{
+    opacity: 1;   
+}
+
+
+/*
+  Second form starts from here.....
+  Second form starts from here.....
+  Second form starts from here.....
+*/
+
+.plan-boxes{
+    display: flex;
+    justify-content: space-between;
+}
+
+.plan-box{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 5px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 125px;
+    min-width: 100px;
+    cursor: pointer;
+    border: 1px solid transparent
+}
+
+.plan-box:hover{
+    border-color: rgb(230, 228, 228);
+}
+
+.plan-box.clicked{
+   border-color: #2ecc71;
+}
+
+.plan-box .fa-solid{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: white;
+}
+
+.plan-box .fa-school-circle-exclamation{
+    background-color: #e7973c;
+}
+
+.plan-box .fa-circle-h{
+    background-color: #e7643c;
+}
+
+.plan-box .fa-circle-nodes{
+    background-color: #5935fc;
+}
+
+
+/*
+Switch wrapper code 
+*/
+
+.switch-wrapper {
+    position: relative;
+    display: inline-flex;
+    padding: 4px;
+    border: 1px solid lightgrey;
+    margin: 40px auto 20px;
+    border-radius: 30px;
+  }
+   
+  .switch-wrapper [type="radio"] {
+    position: absolute;
+    left: -9999px;
+  }
+   
+  .switch-wrapper [type="radio"]:checked#monthly ~ label[for="monthly"],
+  .switch-wrapper [type="radio"]:checked#yearly ~ label[for="yearly"] {
+    color: white;
+  }
+   
+  .switch-wrapper [type="radio"]:checked#monthly ~ label[for="monthly"]:hover,
+  .switch-wrapper [type="radio"]:checked#yearly ~ label[for="yearly"]:hover {
+    background: transparent;
+  }
+   
+  .switch-wrapper
+    [type="radio"]:checked#monthly
+    + label[for="yearly"]
+    ~ .highlighter {
+    transform: none;
+  }
+   
+  .switch-wrapper
+    [type="radio"]:checked#yearly
+    + label[for="monthly"]
+    ~ .highlighter {
+    transform: translateX(100%);
+  }
+   
+  .switch-wrapper label {
+    font-size: 16px;
+    z-index: 1;
+    min-width: 100px;
+    line-height: 32px;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: color 0.25s ease-in-out;
+    text-align: center;
+  }
+   
+  .switch-wrapper label:hover {
+    background: lightgray;
+  }
+   
+  .switch-wrapper .highlighter {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    height: calc(100% - 8px);
+    border-radius: 30px;
+    background: darkgreen;
+    transition: transform 0.25s ease-in-out;
+  }
+
+  .pick-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0;
+    border: 1px solid rgb(79, 32, 167);
+    border-radius: 5px;
+    padding: 10px 15px;
+    min-width: 400px;
+  }
+
+ .pick-box-desc{
+    display: flex;
+    gap: 15px;
+ }
+
+ .pick-box-desc input{
+    cursor: pointer;
+ }
+
+ .pick-box-desc h4{
+    color: rgb(27, 27, 117);
+ }
+
+ .finishing-container{
+    background-color: rgb(255, 250, 250);
+    padding: 10px 15px;
+    border-radius: 5px;
+ }
+
+ .finishing{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid rgb(216, 214, 214);
+ }
+
+ .finishing:nth-last-child(1){
+    border-bottom-color: transparent;
+ }
+
+ .finish-desc a{
+    display: none;
+ }
+
+ .total-box{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 15px;
+    margin-top: 10px;
+ }
+
+ .thank-box{
+    text-align: center;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+ }
+
+/*
+ media query starts from here....
+ media query starts from here....
+*/
+
+@media only screen and (max-width: 1200px){
+    .container{
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 992px){
+    .container{
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    body{
+        align-items: flex-start;
+    }
+    .container{
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        margin-top: 50px;
+    }
+    aside{
+        width: 100%;
+        min-height: 20vh;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .step-desc{
+       display: none;
+    }
+
+    main{
+        max-width: 95%;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        padding: 50px;
+        border-radius: 10px;
+        position: absolute;
+        top: 17vh;
+        background-color: white;
+    }
+
+
+
+    .plan-boxes{
+        display: block;
+    }
+    
+    .plan-box{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 10px;
+        min-height: fit-content;
+        margin-bottom: 15px;
+    }
+    
+}
+
+@media only screen and (max-width: 520px){
+    main{
+        padding: 15px;
+    }
+    .pick-box{
+        min-width: 200px;
+        gap: 20px;
+      }
+}
