@@ -1,118 +1,167 @@
-const section = document.querySelector('section')
-const playerLivesCount = document.querySelector('span')
-let playerLives = 6
-
-playerLivesCount.textContent = playerLives
-
-const getData = () => [
-    { imgSrc: 'tree.jpg', name: 'tree'},
-    { imgSrc: 'shoping.jpg', name: 'shoping'},
-    { imgSrc: 'reinhart.jpg', name: 'reinhart'},
-    { imgSrc: 'meeting.jpg', name: 'meeting'},
-    { imgSrc: 'markus.jpg', name: 'markus'},
-    { imgSrc: 'banner-7.png', name: 'banner-7'},
-    { imgSrc: 'greytshirt.jpg', name: 'greytshirt'},
-    { imgSrc: 'greyhoddie.jpg', name: 'greyhoddie'},
-    { imgSrc: 'tree.jpg', name: 'tree'},
-    { imgSrc: 'shoping.jpg', name: 'shoping'},
-    { imgSrc: 'reinhart.jpg', name: 'reinhart'},
-    { imgSrc: 'meeting.jpg', name: 'meeting'},
-    { imgSrc: 'markus.jpg', name: 'markus'},
-    { imgSrc: 'banner-7.png', name: 'banner-7'},
-    { imgSrc: 'greytshirt.jpg', name: 'greytshirt'},
-    { imgSrc: 'greyhoddie.jpg', name: 'greyhoddie'}
-    // { imgSrc: 'gilles.jpg', name: 'gilles'},
-    // { imgSrc: 'francis.jpg', name: 'francis'},
-    // { imgSrc: 'domenico.jpg', name: 'domenico'},
-    // { imgSrc: 'charles.jpg', name: 'charles'},
-    // { imgSrc: 'chameleon.jpg', name: 'chameleon'},
-    // { imgSrc: 'car.png', name: 'car'},
-    // { imgSrc: 'blacktshirt.jpg', name: 'blacktshirt'},
-    // { imgSrc: 'blackhoddie.jpg', name: 'blackhoddie'},
+const quizDB = [
+    {
+        question: 'Which among these is not an applications server provided by Spring Boot?',
+        a: 'Embedded Tomcat',
+        b: 'Jetty',
+        c: 'Undertow',
+        d: 'Binary link',
+        ans: 'ans4'
+    },
+    {
+        question: 'Does Spring Boot in any way reduce the need to write lots of configuration? ',
+        a: 'Yes',
+        b: 'No',
+        c: 'Undecided',
+        d: 'No idea',
+        ans: 'ans2'
+    },
+    {
+        question: 'Why is it possible to get started with minimum effort on Spring Boost?',
+        a: 'Because it has easy to use codes.',
+        b: 'Because it is enabled by the Spring framework.',
+        c: 'Because it has an opinionated view on Spring platform.',
+        d: 'Because it is well explained.',
+        ans: 'ans3'
+    },
+    {
+        question: 'Which among these does Spring Boot not provide?',
+        a: 'Externalized configuration',
+        b: 'Equalizer',
+        c: 'Health checks',
+        d: 'Metrix',
+        ans: 'ans1'
+    },
+    {
+        question: 'The auto-configuration chooses what to create based on the availability of what?',
+        a: 'Fork',
+        b: 'Files',
+        c: 'Beans',
+        d: 'Information',
+        ans: 'ans2'
+    },
 ]
 
-const randomize = () =>{
-    const cardData = getData()
-    cardData.sort(()=> Math.random() - 0.5)
-    return  cardData
+// const question = document.querySelector('.question')
+// const option1 = document.querySelector('#option1')
+// const option2 = document.querySelector('#option2')
+// const option3 = document.querySelector('#option3')
+// const option4 = document.querySelector('#option4')
+// const submit = document.querySelector('#submit')
+
+// const answers = document.querySelectorAll('.answer')
+
+// const showScore = document.querySelector('#showScore')
+
+// let questionCount = 0
+// let score = 0
+
+
+// const loadQuestion = () =>{
+//     const questionList = quizDB[questionCount]
+//     question.innerText = questionList.question
+//     option1.innerText = questionList.a
+//     option2.innerText = questionList.b
+//     option3.innerText = questionList.c
+//     option4.innerText = questionList.d
+// }
+
+// loadQuestion()
+
+// const getCheckAnswer = () =>{
+//     let answer;
+
+//     answers.forEach((curAnsElem)=>{
+//         if(curAnsElem.checked){
+//              answer = curAnsElem.id
+//         }
+//     })
+//     return answer
+// }
+
+// const deselectAll = () =>{
+//     answers.forEach(curAnsElem => curAnsElem.checked = false)
+// }
+
+// submit.addEventListener('click', ()=>{
+//     const checkedAnswer = getCheckAnswer()
+    
+//     if(checkedAnswer === quizDB[questionCount].ans){
+//         score++
+//     }
+
+//     questionCount++
+
+//     deselectAll()
+
+//     if(questionCount < quizDB.length){
+//         loadQuestion()
+//     }else{
+//         showScore.innerHTML = `
+//            <h3>You scored ${score}/${quizDB.length}</h3>
+//            <button class='btn' onclick="location.reload()">Reload</button>
+//         `
+//         showScore.classList.remove('scoreArea')
+//         const innerDiv = document.querySelector('.inner-div')
+//         innerDiv.innerHTML = showScore.innerHTML
+//     }
+// })
+
+const questionIS = document.querySelector('.question')
+const option1 = document.querySelector('#option1')
+const option2 = document.querySelector('#option2')
+const option3 = document.querySelector('#option3')
+const option4 = document.querySelector('#option4')
+const answers = document.querySelectorAll('.answer')
+const submit = document.getElementById('submit')
+const showScore = document.getElementById('showScore')
+
+
+let questionCount = 0
+let score = 0
+
+const setQuestions = () =>{
+    const questionList = quizDB[questionCount]
+    const {question, ans, a, b, c, d} = questionList
+
+    questionIS.innerText = question
+    option1.innerText = a
+    option2.innerText = b
+    option3.innerText = c
+    option4.innerText = d
 }
 
-const cardGenerator = () =>{
-    const cardData = randomize()
+setQuestions()
 
-    cardData.forEach((item) =>{
-        const card = document.createElement('div');
-        const face = document.createElement('img');
-        const back = document.createElement('div');
-        card.classList = 'card';
-        face.classList = 'face';
-        back.classList = 'back';
-
-        face.src = item.imgSrc;
-        card.setAttribute('name', item.name)
-
-        section.appendChild(card)
-        card.appendChild(face)
-        card.appendChild(back)
-
-        card.addEventListener('click', (e)=>{
-            card.classList.toggle('toggleCard')
-            checkCards(e)
-        })
-    })
+const deleteCheck = () =>{
+   answers.forEach(answer => answer.checked = false)
 }
 
-const checkCards = (e) =>{
-    const clickedCard = e.target;
-    clickedCard.classList.add('flipped')
-    const flippedCards = document.querySelectorAll('.flipped');
-    const toggleCard = document.querySelectorAll('.toggleCard')
+deleteCheck()
 
-    if(flippedCards.length === 2){
-        if(flippedCards[0].getAttribute('name') === flippedCards[1].getAttribute('name')){
-            console.log('match')
-            flippedCards.forEach(card =>{
-                card.classList.remove('flipped');
-                card.style.pointerEvents = 'none'
-            })
-            playerLives++;
-            playerLivesCount.textContent = playerLives;
-        }else{
-            console.log('wrong')
-            flippedCards.forEach((card)=>{
-                card.classList.remove('flipped');
-                setTimeout(()=> card.classList.remove('toggleCard'), 1000)
-            })
-            playerLives--;
-            playerLivesCount.textContent = playerLives;
-            if(playerLives === 0){
-                restart('Try again')
+submit.addEventListener('click', ()=>{
+
+    answers.forEach(answer =>{
+        if(answer.checked){
+            if(answer.id === quizDB[questionCount].ans){
+                score++
             }
         }
-    }
-    if(toggleCard.length === 16){
-        restart('You won')
-    }
-}
+    })
 
-const restart = (text) =>{
-   let cardData = randomize()
-   let faces = document.querySelectorAll('.face');
-   let cards = document.querySelectorAll('.card');
-   section.style.pointerEvents = 'none'
-   cardData.forEach((item, index)=>{
-    cards[index].classList.remove('toggleCard');
-    setTimeout(()=>{
-        cards[index].style.pointerEvents = 'all';
-        faces[index].src = item.imgSrc;
-        cards[index].setAttribute('name', item.name);
-        section.style.pointerEvents = 'all'
-    }, 1000)
-   })
-   playerLives = 6;
-   playerLivesCount.textContent = playerLives;
-   setTimeout(()=> window.alert(text), 100);
-}
+    if(questionCount < quizDB.length - 1){
+        questionCount++
+        deleteCheck()
+    }else{
+        showScore.innerHTML = `You have answered ${score} questions out of ${quizDB.length}`
+    }
+    setQuestions()
+})
 
-cardGenerator()
+
+
+
+
+
+
+
 
