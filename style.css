@@ -1,37 +1,115 @@
-*{
-    padding: 0;
-    margin: 0;
-}
-
-.body{
-    background: url('./snake.jpg');
-    min-height: 100vh;
-    background-size: 100vw 100vh;
-    background-repeat: no-repeat;
+.center{
     display: flex;
+    text-align: center;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-#board{
-    background: linear-gradient(green, rgb(47, 0, 255));
-    width: 90vmin;
-    height: 92vmin;
-    border: 2px solid white;
-    display: grid;
-    grid-template-rows: repeat(18, 1fr);
-    grid-template-columns: repeat(18, 1fr);
+.ring{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    animation: ring 2s linear infinite;
 }
 
-.head{
-    background-color: red;
+@keyframes ring{
+    0%{
+        transform: rotate(0deg);
+        box-shadow: 1px 5px 2px #e65c00;
+    }
+    50%{
+        transform: rotate(180deg);
+        box-shadow: 1px 5px 2px #18b201;
+    }
+    100%{
+        transform: rotate(360deg);
+        box-shadow: 1px 5px 2px #0456c8;
+    }
 }
 
-.snake{
-    background-color: purple;
+.ring::before{
+    position: absolute;
+    content: '';
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(80, 80, 80, 0.3);
 }
 
-.food{
-    background-color: yellow;
+span{
+    color: #737373;
+    font-size: 20px;
+    text-transform: uppercase;
+    line-height: 200px;
+}
 
+.container{
+   display: flex;
+   flex-wrap: wrap;
+   gap: 10px;
+}
+
+.profileLoad{
+    animation: loading 1s ease-in-out infinite;
+}
+
+@keyframes loading{
+    0%{
+        opacity: 0.3;
+    }
+    50%{
+        opacity: 0.7;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+
+.account{
+    margin: 10px 0;
+}
+
+.profile{
+    display: flex;
+    gap: 5px;
+    align-items: flex-end;
+    min-width: 45vw;
+}
+
+.picLoad{
+    width: 30px;
+    height: 30px;
+    background-color: gainsboro;
+    border-radius: 50%;
+}
+.pic{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.nameLoad{
+    height: 10px;
+    width: 150px;
+    background-color: gainsboro;
+}
+
+.desc{
+    margin: 10px 0;
+}
+
+.lineLoad{
+    height: 6px;
+    width: 300px;
+    background-color: gainsboro;
+    margin: 4px;
 }
