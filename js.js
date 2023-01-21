@@ -1,34 +1,64 @@
-const container = document.querySelector('.container')
+const form = document.getElementById('generate-form')
+const qr = document.getElementById('qrcode')
 
-async function fun(){
-     const account = document.createElement('div')
-     account.classList.add('center')
-     account.innerHTML = `
-     <div class="ring"></div>
-     <span>Loading...</span>
-     `
-     container.appendChild(account)
-     const res = await fetch('https://jsonplaceholder.typicode.com/photos')
-     const posts = await res.json()
+const onGenerateSubmit = (e) =>{
+   e.preventDefault()
 
-     container.innerHTML = ''
-     posts.forEach(post =>{
-        const {title, url, thumbnailUrl} = post
-        const account = document.createElement('div')
-        account.innerHTML = `
-        <div class="profile">
-           <img class="pic" src="${url}" /img>
-           <div class="name">${title}</div>
-        </div>
-        <div class="desc">
-           <div class="line">${thumbnailUrl}</div>
-           <div class="line">${thumbnailUrl}</div>
-           <div class="line">${thumbnailUrl}</div>
-        </div>
-        `
-        container.appendChild(account)
-     })
+   clearUI()
+
+   const url = document.getElementById('url').value;
+   const size = document.getElementById('size').value;
+
+   if(url === ''){
+      alert('Please enter a URL')
+   }else{
+      hideSpinner()
+
+      setTimeout(()=>{
+        hideSpinner()
+
+        generateQRCode(url, size)
+
+        setTimeout(()=>{
+          const saveUrl = qr.querySelector('img').src;
+          createSaveBtn(saveUrl)
+        }, 50)
+      }, 1000)
+   }
 }
 
-fun()
+const generateQRCode = (url, size) =>{
+   const qrcode = new QRCode('qrcode', {
+      text: url,
+      width: size,
+      height: size
+   })
+}
+
+const showSpinner = () =>{
+   document.getElementById('spinner').style.display = 'block'
+}
+
+const hideSpinner = () =>{
+   document.getElementById('spinner').style.display = 'none'
+}
+
+const clearUI = () =>{
+   qr.innerHTML = '';
+   const saveLink = document.getElementById('save-link')
+   if(saveLink) saveLink.remove()
+}
+
+const createSaveBtn = (saveUrl) =>{
+   const link = document.createElement('a')
+   link.id = 'save-link';
+   link.href = saveUrl;
+   link.download = 'qrcode'
+   link.innerHTML = 'Save Image'
+   document.getElementById('generated').appendChild(link)
+}
+
+hideSpinner()
+
+form.addEventListener('submit', onGenerateSubmit)
 
