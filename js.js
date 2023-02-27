@@ -1,16 +1,9 @@
-class testDrive{
-    constructor(name){
-       console.log("Constructor: tumi " + name)
-    }
+
+const func = (dat) =>{
+      const first = dat.slice(0, 3)
+      const last =  dat.slice(-3)
+
+      return first.concat(last).length < 3 ? dat : first + last
 }
 
-class manger extends testDrive{
-    constructor(name){
-        super(name)
-        console.log("Constructor: Manager" + name)
-    }
-}
-
-let person2 = new manger('maymud')
-
-console.log(person2)
+console.log(func("ops! I am damn"))
