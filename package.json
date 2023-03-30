@@ -9,7 +9,20 @@
   "author": "Mahmudul Hasan",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.3.4",
     "nodemon": "^2.0.20",
-    "random-fruits-name": "^1.9.5"
-  }
+    "random-fruits-name": "^1.9.5",
+    "redux": "^4.2.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mHasan1037/javascript-practice.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/mHasan1037/javascript-practice/issues"
+  },
+  "homepage": "https://github.com/mHasan1037/javascript-practice#readme"
 }
