@@ -55,7 +55,44 @@
 // }
 
 
+function outerFun(){
+    var value = 0;
 
+    function resetValue(){
+        return value = 0
+    }
+
+    function increaseValue(){
+        value = value + 1
+        return value
+    }
+
+    function decreaseValue(){
+        value = value - 1
+        return value;
+    }
+
+    function increaseByParameter(incVal){
+        value = value + incVal
+        return value
+    }
+
+    return {
+        defaultValue: resetValue,
+        increaseOne: increaseValue,
+        decreaseOne: decreaseValue,
+        increaseValue: increaseByParameter
+    }
+}
+
+var myFun = outerFun()
+
+const value = document.getElementById('value')
+
+document.getElementById('increaseOne').addEventListener('click', ()=> value.innerText = myFun.increaseOne())
+document.getElementById('reset').addEventListener('click', ()=> value.innerText = myFun.defaultValue())
+document.getElementById('decreaseOne').addEventListener('click', ()=> value.innerText = myFun.decreaseOne())
+document.getElementById('increaseFive').addEventListener('click', ()=> value.innerText = myFun.increaseValue(5))
 
 
 
