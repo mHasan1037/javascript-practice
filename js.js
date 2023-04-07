@@ -1,98 +1,134 @@
-// const table = document.getElementById('table')
-// const form = document.querySelector('form')
-// const input = form.querySelector('input')
+// const { default: axios } = require('axios')
+// const {createStore, applyMiddleware} = require('redux')
+// const thunk = require('redux-thunk').default
 
-// form.addEventListener('submit', e =>{
-//   e.preventDefault()
-//   const search = input.value
+// const GET_TODOS_REQUEST = 'GET_TODOS_REQUEST'
+// const GET_TODOS_SUCCESS = 'GET_TODOS_SUCCESS'
+// const GET_TODOS_FAILED = 'GET_TODOS_FAILED'
+// const API_URL = 'https://jsonplaceholder.typicode.com/todos'
 
-//   stockData(search)
-//   input.value = ''
-//   table.innerHTML = 'Loading...'
-// })
+// const initialTodosState = {
+//     isLoading: false,
+//     todos: [],
+//     error: null,
+// }
 
-// function stockData(search){
+// const getTodosRequest = () =>{
+//     return{
+//         type: GET_TODOS_REQUEST
+//     }
+// }
 
-//   fetch('https://api.twelvedata.com/stocks')
-//   .then(res => res.json())
-//   .then(data => {
+// const getTodosSuccess = (todos) =>{
+//     return{
+//         type: GET_TODOS_SUCCESS,
+//         payload: todos
+//     }
+// }
 
-//     if(Array.isArray(data.data)){
-//       const result = data.data.filter(stock =>{
-//         const stockName = stock.name.toLowerCase()
-//         return stockName.includes(search.toLowerCase())
+// const getTodosFailed = (error) =>{
+//     return{
+//         type: GET_TODOS_FAILED,
+//         payload: error
+//     }
+// }
+
+// const todosReducer = (state=initialTodosState, action) =>{
+//     switch(action.type){
+//         case GET_TODOS_REQUEST:
+//             return{
+//                 ...state,
+//                 isLoading: true
+//             }
+//         case GET_TODOS_SUCCESS:
+//             return{
+//                 ...state,
+//                 isLoading: false,
+//                 todos: action.payload
+//             }
+//         case GET_TODOS_FAILED:
+//             return{
+//                 ...state,
+//                 isLoading: false,
+//                 error: action.payload
+//             }
+        
+//         default:
+//             return state;
+//     }
+// }
+
+// function fetchData(){
+//    return(dispatch) =>{
+//       dispatch(getTodosRequest())
+//       axios.get(API_URL)
+//       .then(res =>{
+//         const todos = res.data
+//         const titles = todos.map(todo => todo.title)
+//         dispatch(getTodosSuccess(titles))
 //       })
-//       if(result){
-//          table.innerHTML = `
-//          <tr>
-//             <th>Type</th>
-//             <th>Name</th>
-//             <th>Country</th>
-//             <th>Currency</th>
-//             <th>Exchange</th>
-//         </tr>
-//          `
-//           result.map((data, idx)=>{
-//             const {name, country, currency, exchange, type} = data
-    
-//             const box = document.createElement('tr')
-//             box.classList.add('box')
-//             box.innerHTML = `
-//             <td>${type}</td>
-//             <td>${name}</td>
-//             <td>${country}</td>
-//             <td>${currency}</td>
-//             <td>${exchange}</td>
-//             `
-//             table.appendChild(box)
-//           })
-//         }else{
-//           console.log('no stock found')
-//         }
-//       }
-//   })
-//   .catch(error => console.error(error))
+//       .catch(error =>{
+//         const errorMessage = (error.message)
+//         dispatch(getTodosFailed(errorMessage))
+//         console.log(error.message)
+//       })
+//    }
 // }
 
 
-function outerFun(){
-    var value = 0;
+// const store = createStore(todosReducer, applyMiddleware(thunk))
 
-    function resetValue(){
-        return value = 0
-    }
+// store.subscribe(()=>{
+//     console.log(store.getState())
+// })
 
-    function increaseValue(){
-        value = value + 1
-        return value
-    }
+// store.dispatch(fetchData())
 
-    function decreaseValue(){
-        value = value - 1
-        return value;
-    }
+const { createStore } = require("redux")
 
-    function increaseByParameter(incVal){
-        value = value + incVal
-        return value
-    }
+const INCREMENT = 'INCREMENT'
+const DECREMENT = 'DECREMENT'
 
+const initialCountState = { count: 0}
+
+const increaseCount = () => {
     return {
-        defaultValue: resetValue,
-        increaseOne: increaseValue,
-        decreaseOne: decreaseValue,
-        increaseValue: increaseByParameter
+        type: INCREMENT
     }
 }
 
-var myFun = outerFun()
+const decrementCount = () =>{
+    return {
+        type: DECREMENT
+    }
+}
 
-const value = document.getElementById('value')
+const createReducer = (state=initialCountState, action) =>{
+    switch(action.type){
+        case INCREMENT:
+            return{
+                ...state,
+                count: state.count + 1
+            }
+        case DECREMENT: 
+            return{
+                ...state,
+                count: state.count - 1
+            }
+        default:
+            return state
+    }
+}
 
-document.getElementById('increaseOne').addEventListener('click', ()=> value.innerText = myFun.increaseOne())
-document.getElementById('reset').addEventListener('click', ()=> value.innerText = myFun.defaultValue())
-document.getElementById('decreaseOne').addEventListener('click', ()=> value.innerText = myFun.decreaseOne())
-document.getElementById('increaseFive').addEventListener('click', ()=> value.innerText = myFun.increaseValue(5))
+
+const store = createStore(createReducer)
+
+store.subscribe(()=>{
+    console.log(store.getState())
+})
+
+store.dispatch(increaseCount())
+
 
 
 
