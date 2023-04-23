@@ -3,6 +3,8 @@
 // const thunk = require('redux-thunk').default
 
 
+
+
 // const GET_TODOS_REQUEST = 'GET_TODOS_REQUEST'
 // const GET_TODOS_SUCCESS = 'GET_TODOS_SUCCESS'
 // const GET_TODOS_FAILED = 'GET_TODOS_FAILED'
@@ -141,68 +143,6 @@
 //    accountNumber.value = ''
 //    amount.value = ''
 // })
-
-
-
-class BankAccount{
-     accountName;
-     accountNumber;
-     balance
-
-     constructor(accountName, balance = 0){
-        this.accountName = accountName;
-        this.accountNumber = Date.now();
-        this.balance = balance
-     }
-
-     deposite(amount){
-        this.balance += amount
-     }
-
-     withdraw(amount){
-        this.balance -= amount
-     }
-}
-
-
-class CurrentAccount extends BankAccount{
-   transactionLimit = 5000;
-
-   constructor(customerName, balance = 0){
-      super(customerName, balance)
-   }
-
-   takeBusinessLoan(amount){
-      console.log('taking business load: ' + amount)
-   }
-}
-
-
-class SavingAccount extends BankAccount{
-   transactionLimit = 1000;
-
-   constructor(customerName, balance = 0){
-      super(customerName, balance)
-   }
-
-   takePersonalLoan(amount){
-      console.log('taking personal load: ' + amount)
-   }
-}
-
-
-
-const hasanAcc = new SavingAccount('Hasan', 1000)
-
-
-hasanAcc.withdraw(3000)
-hasanAcc.takePersonalLoan(1000)
-
-console.log(hasanAcc)
-
-
-
-
 
 
 
