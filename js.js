@@ -149,6 +149,113 @@
 
 
 
+// let pageNo = 1;
+// let results = 10;
+// let isPageLoading = true
+
+// const container = document.querySelector('.container')
+// const getLastUserEl = () => document.querySelector(".container > .person:last-child")
+
+// const loadingEle = document.querySelector('#loading')
+// const toggleLoading=(isPageLoading)=>{
+//    loadingEle.classList.toggle('show', isPageLoading)
+// }
+
+
+
+// const getData = async(pageNo, results) =>{
+//    const url = await fetch(`https://randomuser.me/api/?page=${pageNo}&results=${results}&seed=abc`)
+//    const res = await url.json()
+//    return res
+// }
+
+// const loadUsers = (pageNo, results) =>{
+//    return new Promise((resolve, reject)=>{
+//       getData(pageNo, results)
+//       .then((res) =>{
+//          makeUi(res.results)
+//          if(isPageLoading){
+//             observeLastUser()
+//             isPageLoading = false
+//          }
+//          resolve("completed rendering")
+//       })
+//       .catch((error)=>{
+//          reject(error)
+//       })
+//    })
+// }
+
+// toggleLoading(true)
+// loadUsers(pageNo, results)
+// .then((data)=>{
+//    toggleLoading(false)
+// })
+// .catch((error)=> toggleLoading(false))
+
+
+// function makeUi(res){
+//    res.forEach((person, idx)=>{
+//       const {gender, name:{first, last}, picture: {medium: profileImg}} = person
+
+//       const personEl = document.createElement('div')
+//       personEl.classList.add('person')
+//       personEl.innerHTML = `
+//         <h3>${first + last}</h3>
+//         <p>${gender}</p>
+//         <img src=${profileImg} alt=${first + last}/>
+//       `
+//       container.appendChild(personEl) 
+//    }) 
+// }
+
+
+
+// let options = {
+//    root: null,
+//    rootMargin: '-15px',
+//    threshold: 0.5
+// }
+
+// function callBackFunc(entries, observer){
+//    const entry = entries[0]
+
+//    if(!entry.isIntersecting) return
+//    pageNo+=1
+//    toggleLoading(false)
+//    loadUsers(pageNo, results).then((resp)=>{
+//       observeLastUser()
+//       toggleLoading(false)
+//    }).catch((error)=>{
+//       toggleLoading(true)
+//    })
+//    observer.unobserve(entry.target)
+// }
+
+// const observer = new IntersectionObserver(callBackFunc, options)
+
+
+
+// const observeLastUser = () =>{
+//    observer.observe(getLastUserEl())
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
