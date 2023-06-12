@@ -242,7 +242,7 @@
 // }
 
 
-let url = `http://localhost:3000/persons`
+let url = `https://github.com/mHasan1037/javascript-practice/blob/main/person.json`
 
 const tbody = document.querySelector('tbody')
 const form = document.querySelector('form')
