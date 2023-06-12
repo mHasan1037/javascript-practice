@@ -5,6 +5,7 @@
 
 
 
+
 // const GET_TODOS_REQUEST = 'GET_TODOS_REQUEST'
 // const GET_TODOS_SUCCESS = 'GET_TODOS_SUCCESS'
 // const GET_TODOS_FAILED = 'GET_TODOS_FAILED'
@@ -240,6 +241,85 @@
 //    observer.observe(getLastUserEl())
 // }
 
+
+let url = `http://localhost:3000/persons`
+
+const tbody = document.querySelector('tbody')
+const form = document.querySelector('form')
+let nameVal = document.getElementById('name')
+let ageVal = document.getElementById('age')
+let statusOption = document.getElementsByName("status_option")
+
+let idNo;
+
+async function fetchData(){
+    const res = await fetch(url)
+    const data = await res.json()
+
+    makeUi(data)
+
+    idNo = data[data.length - 1].id
+}
+
+fetchData()
+
+function makeUi(data){
+    
+
+    data.forEach((acc, idx)=>{
+        const {id, name, age, status} = acc
+
+        const person = document.createElement('tr')
+
+        person.innerHTML = `
+        <td>${id}</td>
+        <td>${name}</td>
+        <td>${age}</td>
+        <td>${status === true ? 'Active' : 'Ofline'}</td>
+        <td><button>Edit</button></td>
+        <td><button class="dltData">Delete</button></td>
+        `
+        tbody.appendChild(person)
+    })
+}
+
+
+form.addEventListener('submit', (e)=>{
+    e.preventDefault()
+
+    let status;
+    for(let i=0; i <= statusOption.length; i++){
+        if(statusOption[i].checked){
+            status = statusOption[i].value
+            break;
+        }
+    }
+
+    updateData(nameVal.value, ageVal.value, status)
+
+    nameVal.value = ''
+    ageVal.value =''
+})
+
+
+function updateData(name, age, status){
+    const newStatus = status === "Active" ? true : false
+
+    fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+            id: idNo + 1,
+            name,
+            age,
+            status: newStatus
+        }),
+        headers: {
+            "Content-type": "application/json"
+        }
+    })
+    .then((res) => res.json())
+    .then((json)=> console.log(json))
+}
 
 
 
