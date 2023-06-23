@@ -25,12 +25,6 @@
       "status": false
     },
     {
-      "id": 5,
-      "name": "Shah",
-      "age": "50",
-      "status": true
-    },
-    {
       "id": 6,
       "name": "hope",
       "age": "87",
@@ -38,8 +32,38 @@
     },
     {
       "id": 7,
-      "name": "belife",
-      "age": "100",
+      "name": "Jake smith",
+      "age": "50",
+      "status": true
+    },
+    {
+      "id": 8,
+      "name": "testing successfull",
+      "age": "200",
+      "status": true
+    },
+    {
+      "id": 11,
+      "name": "fix it",
+      "age": "10",
+      "status": true
+    },
+    {
+      "id": 12,
+      "name": "testing s",
+      "age": "404",
+      "status": false
+    },
+    {
+      "id": 14,
+      "name": "testing successfull",
+      "age": "200",
+      "status": false
+    },
+    {
+      "id": 15,
+      "name": "testing s",
+      "age": "404",
       "status": true
     }
   ]

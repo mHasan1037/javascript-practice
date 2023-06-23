@@ -50,28 +50,10 @@
 
 
 
-const indices = []
-
-const array = ["a", "b", "a", "c", "b", "a", "d", "e"];
-
-const nums = [1, 5, 4, 6, 4, 8, 7, 10]
-
-
-// let idx = array.indexOf(element)
-
-// while(idx !== -1){
-//     indices.push(idx)
-
-//     idx = array.indexOf(element, idx + 1)
-// }
 
 
 
-let ans = array.fliter((ele, idx)=>{
-    return array.indexOf(ele) === idx
-})
 
-console.log(ans)
 
 
 

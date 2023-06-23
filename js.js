@@ -242,94 +242,288 @@
 // }
 
 
-let url = `https://github.com/mHasan1037/javascript-practice/blob/main/person.json`
 
-const tbody = document.querySelector('tbody')
-const form = document.querySelector('form')
-let nameVal = document.getElementById('name')
-let ageVal = document.getElementById('age')
-let statusOption = document.getElementsByName("status_option")
 
-let idNo;
 
-async function fetchData(){
-    const res = await fetch(url)
-    const data = await res.json()
 
-    makeUi(data)
 
-    idNo = data[data.length - 1].id
-}
+// let url = `http://localhost:3000/persons`
 
-fetchData()
+// const tbody = document.querySelector('tbody')
+// const form = document.querySelector('form')
+// let nameVal = document.getElementById('name')
+// let ageVal = document.getElementById('age')
+// let statusOption = document.getElementsByName("status_option")
 
-function makeUi(data){
+// let idNo;
+
+// async function fetchData(){
+//     const res = await fetch(url)
+//     const data = await res.json()
+
+//     makeUi(data)
+
+//     idNo = data[data.length - 1].id
+// }
+
+// fetchData()
+
+// function makeUi(data){
     
 
-    data.forEach((acc, idx)=>{
-        const {id, name, age, status} = acc
+//     data.forEach((acc, idx)=>{
+//         const {id, name, age, status} = acc
 
-        const person = document.createElement('tr')
+//         const person = document.createElement('tr')
+//         person.setAttribute("id", id)
 
-        person.innerHTML = `
-        <td>${id}</td>
-        <td>${name}</td>
-        <td>${age}</td>
-        <td>${status === true ? 'Active' : 'Ofline'}</td>
-        <td><button>Edit</button></td>
-        <td><button class="dltData">Delete</button></td>
-        `
-        tbody.appendChild(person)
-    })
+//         person.innerHTML = `
+//         <td>${id}</td>
+//         <td class="nameFeild">${name}</td>
+//         <td class="ageFeild">${age}</td>
+//         <td class="statusFeild">${status === true ? 'Active' : 'Ofline'}</td>
+//         <td><button id="edit-btn">Edit</button></td>
+//         <td><button id="dltData">Delete</button></td>
+//         `
+//         tbody.appendChild(person)
+//     })
+// }
+
+
+// form.addEventListener('submit', (e)=>{
+//     e.preventDefault()
+
+//     let status;
+//     for(let i=0; i <= statusOption.length; i++){
+//         if(statusOption[i].checked){
+//             status = statusOption[i].value
+//             break;
+//         }
+//     }
+
+//     updateData(nameVal.value, ageVal.value, status)
+
+//     nameVal.value = ''
+//     ageVal.value =''
+// })
+
+
+// function updateData(name, age, status){
+//     // const newStatus = status === "Active" ? true : false
+
+//     // fetch(url, {
+//     //     method: "POST",
+//     //     body: JSON.stringify({
+//     //         id: idNo + 1,
+//     //         name,
+//     //         age,
+//     //         status: newStatus
+//     //     }),
+//     //     headers: {
+//     //         "Content-type": "application/json"
+//     //     }
+//     // })
+//     // .then((res) => res.json())
+//     // .then((json)=> console.log(json))
+
+//    const newStatus = status === "Active" ? true : false
+
+//    fetch(url, {
+//      method: "POST",
+//      body: JSON.stringify({
+//         id: idNo + 1,
+//         name,
+//         age,
+//         status: newStatus
+//      }),
+//      headers: {
+//         "Content-type" : "application/json"
+//      }
+//    })
+//    .then((res)=> res.json())
+//    .then((json)=> console.log(json))
+// }
+
+
+// const container = document.querySelector('.container')
+
+// container.addEventListener('click', (e)=>{
+//     e.preventDefault()
+
+//     let dltBtnPressed = e.target.id == 'dltData'
+//     let editBtnPressed = e.target.id == 'edit-btn'
+
+//     let deletedId = e.target.parentElement.parentElement.id
+
+//     if(dltBtnPressed){
+//         fetch(`${url}/${deletedId}`, {
+//             method: 'DELETE',
+//         })
+//         .then((res)=> res.json())
+//         .then((json)=> location.reload())
+//     }
+
+//     if(editBtnPressed){
+//         let idIs = e.target.parentElement.parentElement.id
+//         let parent = e.target.parentElement.parentElement
+//         let nameIs = parent.querySelector('.nameFeild').textContent
+//         let ageIs = parent.querySelector('.ageFeild').textContent
+//         let status = parent.querySelector('.statusFeild').textContent
+//         let newStatus = status === "Active" ? true : false
+
+//         nameVal.value = nameIs
+//         ageVal.value = ageIs
+
+//         const submitBtn = document.getElementById('submit')
+//         submitBtn.value = 'Update'
+
+//         submitBtn.addEventListener('click', ()=>{
+//             fetch(`${url}/${idIs}`, {
+//                 method: "PATCH",
+//                 headers: {
+//                     "Content-type": "application/json"
+//                 },
+//                 body: JSON.stringify({
+//                     name: nameVal.value,
+//                     age: ageVal.value,
+//                     status: newStatus
+//                 })
+//             })
+//             .then(res => res.json())
+//             .then(()=> location.reload())
+//         }) 
+//     }
+// })
+
+
+class Node {
+   constructor(data, next = null){
+      this.data = data;
+      this.next = next;
+   }
 }
 
+class LinkedList {
+   constructor(){
+      this.head = null;
+      this.size = 0;
+   }
 
-form.addEventListener('submit', (e)=>{
-    e.preventDefault()
+   insertFirst(data){
+      this.head = new Node(data, this.head)
+      this.size++;
+   }
 
-    let status;
-    for(let i=0; i <= statusOption.length; i++){
-        if(statusOption[i].checked){
-            status = statusOption[i].value
-            break;
-        }
-    }
+   insertLast(data){
+      let node = new Node(data)
+      let current;
 
-    updateData(nameVal.value, ageVal.value, status)
+      if(!this.head){
+         this.head = node;
+      }else{
+         current = this.head;
 
-    nameVal.value = ''
-    ageVal.value =''
-})
+         while(current.next){
+            current = current.next
+         }
+         current.next = node
+      }
+      this.size++
+   }
 
+   insertAt(data, index){
+      if(index < 0 && index > this.size){
+         return
+      }
 
-function updateData(name, age, status){
-    const newStatus = status === "Active" ? true : false
+      if(index === 0){
+         this.head = new Node(data, this.head);
+         return
+      }
 
-    fetch(url, {
-        method: "POST",
-        body: JSON.stringify({
-            id: idNo + 1,
-            name,
-            age,
-            status: newStatus
-        }),
-        headers: {
-            "Content-type": "application/json"
-        }
-    })
-    .then((res) => res.json())
-    .then((json)=> console.log(json))
+      const node = new Node(data);
+      let current, previous;
+
+      current = this.head;
+      let count = 0;
+
+      while(count < index){
+         previous = current;
+         count++;
+         current = current.next;
+      }
+
+      node.next = current;
+      previous.next = node;
+
+      this.size++
+   }
+
+   getAt(index){
+      let current = this.head;
+      let count = 0;
+
+      while(current){
+         if(count == index){
+            console.log(current.data)
+         }
+         count++
+
+         current = current.next;
+      }
+      return null;
+   }
+
+   removeAt(index){
+      if(index > 0 && index > this.size){
+         return;
+      }
+      let current = this.head;
+      let previous;
+      let count = 0;
+
+      if(index === 0){
+         this.head = current.next;
+      }else{
+         while(count < index){
+           count++;
+           previous = current;
+           current = current.next;
+         }
+         previous.next = current.next;
+      }
+      this.size--;
+   }
+
+   clearList(){
+      this.head = null;
+      this.size = 0
+   }
+
+   printListData(){
+      let current = this.head;
+
+      while(current){
+         console.log(current.data)
+         current = current.next
+      }
+   }
 }
 
+const ll = new LinkedList()
+
+ll.insertFirst(100)
+ll.insertFirst(150)
+ll.insertFirst(200)
+ll.insertFirst(250)
+ll.insertLast(50)
 
 
 
 
+ll.insertAt(500, 2)
 
-
-
-
-
+ll.printListData()
 
 
 

@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "json-serve": "^0.1.0",
     "json-server": "^0.17.3",
     "nodemon": "^2.0.20",
     "random-fruits-name": "^1.9.5",
