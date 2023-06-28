@@ -396,137 +396,243 @@
 // })
 
 
-class Node {
-   constructor(data, next = null){
-      this.data = data;
-      this.next = next;
-   }
-}
 
-class LinkedList {
-   constructor(){
-      this.head = null;
-      this.size = 0;
-   }
 
-   insertFirst(data){
-      this.head = new Node(data, this.head)
-      this.size++;
-   }
 
-   insertLast(data){
-      let node = new Node(data)
-      let current;
+// class Node {
+//    constructor(data, next = null){
+//       this.data = data;
+//       this.next = next;
+//    }
+// }
 
-      if(!this.head){
-         this.head = node;
-      }else{
-         current = this.head;
+// class LinkedList {
+//    constructor(){
+//       this.head = null;
+//       this.size = 0;
+//    }
 
-         while(current.next){
-            current = current.next
-         }
-         current.next = node
+//    insertFirst(data){
+//       this.head = new Node(data, this.head)
+//       this.size++;
+//    }
+
+//    insertLast(data){
+//       let node = new Node(data)
+//       let current;
+
+//       if(!this.head){
+//          this.head = node;
+//       }else{
+//          current = this.head;
+
+//          while(current.next){
+//             current = current.next
+//          }
+//          current.next = node
+//       }
+//       this.size++
+//    }
+
+//    insertAt(data, index){
+//       if(index < 0 && index > this.size){
+//          return
+//       }
+
+//       if(index === 0){
+//          this.head = new Node(data, this.head);
+//          return
+//       }
+
+//       const node = new Node(data);
+//       let current, previous;
+
+//       current = this.head;
+//       let count = 0;
+
+//       while(count < index){
+//          previous = current;
+//          count++;
+//          current = current.next;
+//       }
+
+//       node.next = current;
+//       previous.next = node;
+
+//       this.size++
+//    }
+
+//    getAt(index){
+//       let current = this.head;
+//       let count = 0;
+
+//       while(current){
+//          if(count == index){
+//             console.log(current.data)
+//          }
+//          count++
+
+//          current = current.next;
+//       }
+//       return null;
+//    }
+
+//    removeAt(index){
+//       if(index > 0 && index > this.size){
+//          return;
+//       }
+//       let current = this.head;
+//       let previous;
+//       let count = 0;
+
+//       if(index === 0){
+//          this.head = current.next;
+//       }else{
+//          while(count < index){
+//            count++;
+//            previous = current;
+//            current = current.next;
+//          }
+//          previous.next = current.next;
+//       }
+//       this.size--;
+//    }
+
+//    clearList(){
+//       this.head = null;
+//       this.size = 0
+//    }
+
+//    printListData(){
+//       let current = this.head;
+
+//       while(current){
+//          console.log(current.data)
+//          current = current.next
+//       }
+//    }
+// }
+
+// const ll = new LinkedList()
+
+// ll.insertFirst(100)
+// ll.insertFirst(150)
+// ll.insertFirst(200)
+// ll.insertFirst(250)
+// ll.insertLast(50)
+
+
+
+
+// ll.insertAt(500, 2)
+
+// ll.printListData()
+
+
+
+// const stones = 'aAAbbbb'
+// const jewels = "aA"
+
+// function solutionIs(stones, jewels){
+//    const similar = []
+  
+//    for(let i = 0; i < stones.length; i++){
+//       for(let j = 0; j < jewels.length; j++){
+//          if(jewels[j] === stones[i]){
+//             similar.push(stones[i])
+//          }
+//       }
+//    }
+
+//    return similar.length
+// }
+
+
+// console.log(solutionIs(stones, jewels))
+
+
+
+
+
+
+const passwordBox = document.getElementById('passwordBox')
+const copyBtn = document.getElementById('copyBtn')
+const charLength = document.getElementById('charLength')
+const rangeInpt = document.getElementById('rangeInpt')
+const checkbox = document.querySelectorAll(".checkbox")
+const generatePassBtn = document.getElementById("generatePassBtn")
+const passStrength = document.getElementById("passStrength")
+
+let charAt = ""
+let generatedPassword = ""
+
+
+rangeInpt.addEventListener('change', (e)=>{
+   charLength.innerHTML = e.target.value
+})
+
+checkbox.forEach((check)=>{
+   check.addEventListener('change', ()=>{
+      switch(check.dataset.check){
+         case 'Include Uppercase letters':
+            charAt += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            break;
+         case 'Include Lowercase letters':
+            charAt += 'abcdefghijklmnopqrstuvwxyz';
+            break;
+         case 'Include Numbers':
+            charAt += '0123456789';
+            break;
+         case 'Include Symbols':
+            charAt += '!@#$%^&*()';
+            break;
+         default:
+            break;
       }
-      this.size++
+   })
+})
+
+
+
+generatePassBtn.addEventListener('click', ()=>{
+   const len = rangeInpt.value
+
+   generatedPassword = ""
+   for(let i = 0; i < len; i++){
+      const randomIndex = Math.floor(Math.random() * charAt.length)
+      generatedPassword += charAt[randomIndex]
    }
 
-   insertAt(data, index){
-      if(index < 0 && index > this.size){
-         return
-      }
+   passwordBox.innerHTML = generatedPassword
 
-      if(index === 0){
-         this.head = new Node(data, this.head);
-         return
-      }
+   let strengthIs = ''
 
-      const node = new Node(data);
-      let current, previous;
-
-      current = this.head;
-      let count = 0;
-
-      while(count < index){
-         previous = current;
-         count++;
-         current = current.next;
-      }
-
-      node.next = current;
-      previous.next = node;
-
-      this.size++
+   if(len <= 4){
+      strengthIs = 'Very weak'
+   }else if(len <= 8){
+      strengthIs = 'Weak'
+   }else if(len <= 12){
+      strengthIs = 'Medium'
+   }else if(len <= 16){
+      strengthIs = 'Strong'
+   }else{
+      strengthIs = 'Very Strong'
    }
 
-   getAt(index){
-      let current = this.head;
-      let count = 0;
+   passStrength.innerHTML = strengthIs
+})
 
-      while(current){
-         if(count == index){
-            console.log(current.data)
-         }
-         count++
+copyBtn.addEventListener('click', ()=>{
+   let password = passwordBox.innerHTML
 
-         current = current.next;
-      }
-      return null;
-   }
+   navigator.clipboard.writeText(password)
 
-   removeAt(index){
-      if(index > 0 && index > this.size){
-         return;
-      }
-      let current = this.head;
-      let previous;
-      let count = 0;
+   copyBtn.innerHTML = 'Copied'
 
-      if(index === 0){
-         this.head = current.next;
-      }else{
-         while(count < index){
-           count++;
-           previous = current;
-           current = current.next;
-         }
-         previous.next = current.next;
-      }
-      this.size--;
-   }
-
-   clearList(){
-      this.head = null;
-      this.size = 0
-   }
-
-   printListData(){
-      let current = this.head;
-
-      while(current){
-         console.log(current.data)
-         current = current.next
-      }
-   }
-}
-
-const ll = new LinkedList()
-
-ll.insertFirst(100)
-ll.insertFirst(150)
-ll.insertFirst(200)
-ll.insertFirst(250)
-ll.insertLast(50)
-
-
-
-
-ll.insertAt(500, 2)
-
-ll.printListData()
-
-
-
+   setTimeout(()=>{
+      copyBtn.innerHTML = 'Copy'
+   }, 1000)
+})
 
 
 

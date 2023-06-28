@@ -86,6 +86,47 @@
     </table>
  </div> -->
 
+ <div>
+    <div>
+        <p id="passwordBox">
+            Password
+        </p>
+        <button id="copyBtn">Copy</button>
+    </div>
+    <div>
+        <h3>Character length</h3>
+        <p id="charLength">8</p>
+    </div>
+    <input
+       type="range"
+       min="4"
+       max="20"
+       id="rangeInpt"
+    />
+    <div>
+        <div>
+            <input type="checkbox" class="checkbox" data-check="Include Uppercase letters"/>
+            <label>Include Uppercase letters</label>
+        </div>
+        <div>
+            <input type="checkbox" class="checkbox" data-check="Include Lowercase letters"/>
+            <label>Include Lowercase letters</label>
+        </div>
+        <div>
+            <input type="checkbox" class="checkbox" data-check="Include Numbers" />
+            <label>Include Numbers</label>
+        </div>
+        <div>
+            <input type="checkbox" class="checkbox" data-check="Include Symbols" />
+            <label>Include Symbols</label>
+        </div>
+    </div>
+    <div>
+        <span>Strength:</span>
+        <span id="passStrength">Medium</span>
+    </div>
+    <button id="generatePassBtn">Generate Password</button>
+ </div>
  
 
 
