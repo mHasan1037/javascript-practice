@@ -396,186 +396,72 @@
 // })
 
 
+// function shortest(srt, word){
+//     let res = {}
+//     let num = 0
 
+//     for(let i = 0; i < srt.length; i++){
+//         console.log(srt[i])
 
+//         if(srt[num] === word[i]){
+//             res[srt[num]] = 1
+//             num++
+//         }
+//     }
 
-// class Node {
-//    constructor(data, next = null){
-//       this.data = data;
-//       this.next = next;
-//    }
-// }
-
-// class LinkedList {
-//    constructor(){
-//       this.head = null;
-//       this.size = 0;
-//    }
-
-//    insertFirst(data){
-//       this.head = new Node(data, this.head)
-//       this.size++;
-//    }
-
-//    insertLast(data){
-//       let node = new Node(data)
-//       let current;
-
-//       if(!this.head){
-//          this.head = node;
-//       }else{
-//          current = this.head;
-
-//          while(current.next){
-//             current = current.next
-//          }
-//          current.next = node
-//       }
-//       this.size++
-//    }
-
-//    insertAt(data, index){
-//       if(index < 0 && index > this.size){
-//          return
-//       }
-
-//       if(index === 0){
-//          this.head = new Node(data, this.head);
-//          return
-//       }
-
-//       const node = new Node(data);
-//       let current, previous;
-
-//       current = this.head;
-//       let count = 0;
-
-//       while(count < index){
-//          previous = current;
-//          count++;
-//          current = current.next;
-//       }
-
-//       node.next = current;
-//       previous.next = node;
-
-//       this.size++
-//    }
-
-//    getAt(index){
-//       let current = this.head;
-//       let count = 0;
-
-//       while(current){
-//          if(count == index){
-//             console.log(current.data)
-//          }
-//          count++
-
-//          current = current.next;
-//       }
-//       return null;
-//    }
-
-//    removeAt(index){
-//       if(index > 0 && index > this.size){
-//          return;
-//       }
-//       let current = this.head;
-//       let previous;
-//       let count = 0;
-
-//       if(index === 0){
-//          this.head = current.next;
-//       }else{
-//          while(count < index){
-//            count++;
-//            previous = current;
-//            current = current.next;
-//          }
-//          previous.next = current.next;
-//       }
-//       this.size--;
-//    }
-
-//    clearList(){
-//       this.head = null;
-//       this.size = 0
-//    }
-
-//    printListData(){
-//       let current = this.head;
-
-//       while(current){
-//          console.log(current.data)
-//          current = current.next
-//       }
-//    }
-// }
-
-// const ll = new LinkedList()
-
-// ll.insertFirst(100)
-// ll.insertFirst(150)
-// ll.insertFirst(200)
-// ll.insertFirst(250)
-// ll.insertLast(50)
-
-
-
-
-// ll.insertAt(500, 2)
-
-// ll.printListData()
-
-
-
-// const stones = 'aAAbbbb'
-// const jewels = "aA"
-
-// function solutionIs(stones, jewels){
-//    const similar = []
-  
-//    for(let i = 0; i < stones.length; i++){
-//       for(let j = 0; j < jewels.length; j++){
-//          if(jewels[j] === stones[i]){
-//             similar.push(stones[i])
-//          }
-//       }
-//    }
-
-//    return similar.length
+//    return res
 // }
 
 
-// console.log(solutionIs(stones, jewels))
+// console.log(shortest('asdasdpdplejenpple', 'apple'))
 
 
 
 
-function singleNumber(nums){
-   let hm = {}
-   let ans = null;
+const container = document.querySelector('.container')
+const prev = document.getElementById('prev')
+const next = document.getElementById('next')
+const slides = document.querySelectorAll('.img')
 
-   for(let i = 0; i < nums.length; i++){
-      if(hm[nums[i]]){
-         hm[nums[i]] += 1
-      }else{
-         hm[nums[i]] = 1
-      }
-   }
 
-   for(obj in hm){
-      if(hm[obj] <= 1){
-         ans = obj
-      }
-   }
+let counter = 0
 
-   return ans
 
+slides.forEach((slide, index)=>{
+     slide.style.left = `${index * 100}%`
+})
+
+const slideImage = () =>{
+    slides.forEach(slide =>{
+        slide.style.transform = `translateX(${counter * 100}%)`
+    })
 }
 
-console.log(singleNumber([3,3,1]))
+next.addEventListener('click', ()=>{
+
+
+    counter--
+
+    if(counter < -4){
+        counter = 0
+    }
+
+   slideImage() 
+})
+
+
+prev.addEventListener('click', ()=>{
+    counter++
+
+    if(counter > 0){
+       counter = -4
+    }
+   
+   slideImage()
+})
+
+
+
 
 
 
