@@ -396,69 +396,126 @@
 // })
 
 
-// function shortest(srt, word){
-//     let res = {}
-//     let num = 0
 
-//     for(let i = 0; i < srt.length; i++){
-//         console.log(srt[i])
+const input = document.querySelector('.input')
+const defaultText = document.getElementById('default')
+const debounceText = document.getElementById('Debounce')
+const throttleText = document.getElementById('Throttle')
 
-//         if(srt[num] === word[i]){
-//             res[srt[num]] = 1
-//             num++
-//         }
+
+input.addEventListener('input', (e)=>{
+    defaultText.textContent = e.target.value
+
+    updatedThrottleText(e.target.value)
+    updatedDebounceText(e.target.value)
+})
+
+
+const updatedThrottleText = throttle((text)=>{
+    throttleText.textContent = text
+})
+
+const updatedDebounceText = debounce((text)=>{
+    debounceText.textContent = text
+})
+
+function throttle(cb, delay = 1000){
+    let timeout
+    return (...args) =>{
+        clearTimeout(timeout)
+       timeout = setTimeout(()=>{
+             cb(...args)
+       }, delay)
+    }
+}
+
+
+function debounce(cb, delay = 1000){
+    let shouldWait = false;
+    let waitingArgs;
+
+    const timeoutFunc = () =>{
+        if(waitingArgs == null){
+            shouldWait = false
+        }else{
+            cb(...waitingArgs)
+            waitingArgs = null
+
+            setTimeout(timeoutFunc, delay)
+        }
+    }
+
+    return(...args) =>{
+       if(shouldWait){
+        waitingArgs = args
+        return
+       }
+
+       cb(...args)
+       shouldWait = true
+
+       setTimeout(timeoutFunc, delay)
+    }
+}
+
+
+
+
+
+
+// const updatedDebounceText = debounce((text)=>{
+//     debounceText.textContent = text
+// })
+
+// const updatedThrottleText = throttle((text)=>{
+//     throttleText.textContent = text
+// })
+
+// input.addEventListener('input', (e)=>{
+//     defaultText.textContent = e.target.value
+//     updatedDebounceText(e.target.value)
+//     updatedThrottleText(e.target.value)
+// })
+
+
+// function debounce(cb, delay = 1000){
+//     let timeout
+
+//     return (...args) =>{
+//         clearTimeout(timeout)
+
+//         timeout = setTimeout(()=>{
+//             cb(...args)
+//         }, delay)
 //     }
-
-//    return res
 // }
 
 
-// console.log(shortest('asdasdpdplejenpple', 'apple'))
+// function throttle(cb, delay = 1000){
+//     let shouldWait = false
+//     let waitingArgs
+//     const timeoutFunc = ()=>{
+//         if(waitingArgs == null){
+//             shouldWait = false
+//         }else{
+//             cb(...waitingArgs)
+//             waitingArgs = null
+//             setTimeout(timeoutFunc, delay)
+//         }
+//     }
 
+//     return (...args) =>{
+//         if(shouldWait) {
+//             waitingArgs = args
+//             return
+//         }
 
+//         cb(...args)
+//         shouldWait = true
 
-
-const container = document.querySelector('.container')
-const prev = document.getElementById('prev')
-const next = document.getElementById('next')
-const slides = document.querySelectorAll('.img')
-
-
-let counter = 0
-
-
-slides.forEach((slide, index)=>{
-     slide.style.left = `${index * 100}%`
-})
-
-const slideImage = () =>{
-    slides.forEach(slide =>{
-        slide.style.transform = `translateX(${counter * 100}%)`
-    })
-}
-
-next.addEventListener('click', ()=>{
-
-
-    counter--
-
-    if(counter < -4){
-        counter = 0
-    }
-
-   slideImage() 
-})
-
-
-prev.addEventListener('click', ()=>{
-    counter++
-
-    if(counter > 0){
-       counter = -4
-    }
-   
-   slideImage()
-})
+//         setTimeout(timeoutFunc, delay)
+//     }
+// }
 
 
 
